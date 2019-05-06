@@ -1,5 +1,5 @@
 {
-  "name": "ng-util",
+  "name": "@ulfalfa/ng-util",
   "version": "0.1.0",
   "peerDependencies": {
     "@angular/cdk": "~7.3.7",
