@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NgUtilComponent } from './ng-util.component';
+import { MasonryComponent } from './masonry.component';
 
-describe('NgUtilComponent', () => {
-  let component: NgUtilComponent;
-  let fixture: ComponentFixture<NgUtilComponent>;
+describe('MasonryComponent', () => {
+  let component: MasonryComponent;
+  let fixture: ComponentFixture<MasonryComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NgUtilComponent ]
+      declarations: [ MasonryComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NgUtilComponent);
+    fixture = TestBed.createComponent(MasonryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

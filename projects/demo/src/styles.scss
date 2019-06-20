@@ -10,5 +10,10 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+app-root {
+  display: flex;
+  height: 100vh;
+  min-height: 100vh;
+}
 
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
