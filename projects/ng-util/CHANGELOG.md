@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.2](https://github.com/ulfalfa/ng-util/compare/@ulfalfa/ng-util@0.3.1...@ulfalfa/ng-util@0.3.2) (2019-06-20)
+
+
+### Bug Fixes
+
+* **tag-input:** formcontrol is optional ([65550b1](https://github.com/ulfalfa/ng-util/commit/65550b1))
+
+
+
+
+
 ## [0.3.1](https://github.com/ulfalfa/ng-util/compare/@ulfalfa/ng-util@0.3.0...@ulfalfa/ng-util@0.3.1) (2019-06-20)
 
 **Note:** Version bump only for package @ulfalfa/ng-util
