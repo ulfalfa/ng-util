@@ -19,10 +19,10 @@
       "dom"
     ],
     "paths": {
-      "ng-util": [
+      "@ulfalfa/ng-util": [
         "dist/ng-util"
       ],
-      "ng-util/*": [
+      "@ulfalfa/ng-util/*": [
         "dist/ng-util/*"
       ]
     }

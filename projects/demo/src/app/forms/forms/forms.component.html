@@ -1,0 +1,22 @@
+<div fxLayout="column" fxLayoutGap="15px" [style.padding.px]="15">
+  <mat-form-field>
+    <mat-select placeholder="Select formset" [(ngModel)]="selectedValue" name="item">
+      <mat-option [value]="0">
+        Form 1
+      </mat-option>
+      <mat-option [value]="1">
+        Form 2
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div fxLayout="row" fxLayoutGap="15px">
+    <us-material-form class="mat-elevation-z1" fxFlex="60" (formChange)="formChanged($event)"
+      [controls]="controlSets[selectedValue]" [(value)]="data">
+    </us-material-form>
+
+    <div class="mat-elevation-z2" fxFlex="40">
+      <pre>{{data|json}}</pre>
+    </div>
+  </div>
+</div>

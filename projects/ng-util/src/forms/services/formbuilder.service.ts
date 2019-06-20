@@ -17,6 +17,7 @@ import {
   Validators,
   ValidatorFn,
   FormBuilder,
+  ValidationErrors,
 } from '@angular/forms'
 
 import {
@@ -43,9 +44,11 @@ import {
   DynamicFormControlDescription,
 } from './form.decorator'
 // @dynamic
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class FormbuilderService {
   static count = 0
+
+  validationMessages: any = {}
 
   controlDict = new Map<string, DynamicFormControlDescription>()
   constructor(
@@ -64,6 +67,7 @@ export class FormbuilderService {
         if (!metadata) {
           throw new Error(`No metadata for control ${control.name}`)
         }
+
         this.controlDict.set(metadata.name, {
           param: metadata.param,
           component: control,
@@ -78,6 +82,10 @@ export class FormbuilderService {
     data?: any
   ): FormControl {
     const validators: ValidatorFn[] = []
+
+    if (formDefinition.required === true) {
+      validators.push(Validators.required)
+    }
 
     const control = this.fb.control(data || formDefinition.default, validators)
 
@@ -186,5 +194,33 @@ export class FormbuilderService {
 
     description.value = param
     return description
+  }
+
+  getErrors(container: FormGroup): any {
+    let messages = {}
+    for (const controlKey in container.controls) {
+      if (container.controls.hasOwnProperty(controlKey)) {
+        const c = container.controls[controlKey]
+        // If it is a FormGroup, process its child controls.
+        if (c instanceof FormGroup) {
+          const childMessages = this.getErrors(c)
+          messages = { ...messages, ...childMessages }
+        } else {
+          // Oly validate if there are validation messages for the control
+          if (this.validationMessages[controlKey]) {
+            messages[controlKey] = ''
+            if ((c.dirty || c.touched) && c.errors) {
+              Object.keys(c.errors).map(messageKey => {
+                if (this.validationMessages[controlKey][messageKey]) {
+                  messages[controlKey] +=
+                    this.validationMessages[controlKey][messageKey] + ' '
+                }
+              })
+            }
+          }
+        }
+      }
+    }
+    return messages
   }
 }

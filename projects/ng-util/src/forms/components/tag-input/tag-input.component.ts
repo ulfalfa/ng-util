@@ -1,9 +1,17 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core'
+import {
+  Component,
+  OnInit,
+  Input,
+  ViewChild,
+  ElementRef,
+  Host,
+} from '@angular/core'
 
 import {
   ControlValueAccessor,
   NG_VALUE_ACCESSOR,
   FormControl,
+  NgControl,
 } from '@angular/forms'
 
 import {
@@ -31,11 +39,15 @@ import { Ha4usFormControl } from '../../services/form.decorator'
 export class TagInputComponent implements OnInit, ControlValueAccessor {
   @Input() placeholder: string
 
-  @Input() availableTags: string[]
+  @Input() availableTags: string[] = []
+
+  @Input() set values(tags: string[]) {
+    this.availableTags = tags || []
+  }
 
   filteredTags: Observable<string[]>
 
-  currentTags: string[]
+  currentTags: string[] = []
 
   protected _onChange: (_any) => void
   protected _onTouched: (_any) => void
@@ -46,14 +58,18 @@ export class TagInputComponent implements OnInit, ControlValueAccessor {
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>
 
   disabled = false
-
-  constructor() {
-    this.filteredTags = this.tagCtrl.valueChanges.pipe(
-      startWith(null),
-      map((tag: string) =>
-        tag ? this._filter(tag) : this.availableTags.slice()
+  constructor(@Host() public formControl: NgControl) {
+    if (this.formControl) {
+      // Note: we provide the value accessor through here, instead of
+      // the `providers` to avoid running into a circular import.
+      this.formControl.valueAccessor = this
+      this.filteredTags = this.tagCtrl.valueChanges.pipe(
+        startWith(null),
+        map((tag: string) =>
+          tag ? this._filter(tag) : this.availableTags.slice()
+        )
       )
-    )
+    }
   }
 
   ngOnInit() {}

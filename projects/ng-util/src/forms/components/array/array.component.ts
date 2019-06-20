@@ -33,10 +33,10 @@ export class ArrayComponent implements OnInit {
     }
   }
 
-  add() {
-    this.formArray.push(this.fbs.newArrayGroup(this.control.controls))
+  add(idx: number) {
+    this.formArray.insert(idx, this.fbs.newArrayGroup(this.control.controls))
   }
-  delete() {
-    this.formArray.removeAt(this.formArray.length - 1)
+  delete(idx: number) {
+    this.formArray.removeAt(idx)
   }
 }

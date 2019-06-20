@@ -1,25 +1,24 @@
-<h3>{{control.label}}</h3>
-<ng-container [formGroup]="parentGroup">
+<div class="mat-elevation-z2 groupcontent" [formGroup]="parentGroup">
+  <p *ngIf="control.label" class="mat-body-2">{{control.label}}</p>
   <ng-container [formArrayName]="control.id">
-    <div class="mat-elevation-z1 arrayelement" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px"
+    <div class="arrayelement" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px"
       *ngFor="let group of formArray.controls; let i=index">
       <!-- The repeated alias template -->
-      <span class="counter">{{i + 1}}</span>
+      <!--  <span class="counter">{{i + 1}}</span>-->
       <div fxFlex fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="10px">
-        <us-form-control [fxFlex]="control.flex" *ngFor="let control of control.controls" [formGroup]="group"
-          [control]="control">
+        <us-form-control [fxFlex]="control.flex" *ngFor="let control of control.controls; let idx=index"
+          [formGroup]="group" [control]="control">
         </us-form-control>
+      </div>
+      <div fxLayout="column">
+        <button mat-icon-button [disabled]="!control.max || (formArray.length >= control.max)" (click)=add(i)>
+          <mat-icon>add</mat-icon>
+        </button>
+        <button mat-icon-button [disabled]="formArray.length <= (control.min || 1)" (click)=delete(i)>
+          <mat-icon>remove</mat-icon>
+        </button>
       </div>
 
     </div>
   </ng-container>
-</ng-container>
-<div fxLayoutAlign="end">
-
-  <button mat-icon-button [disabled]="!control.max || (formArray.length >= control.max)" (click)=add()>
-    <mat-icon>add</mat-icon>
-  </button>
-  <button mat-icon-button [disabled]="formArray.length <= (control.min || 1)" (click)=delete()>
-    <mat-icon>remove</mat-icon>
-  </button>
 </div>

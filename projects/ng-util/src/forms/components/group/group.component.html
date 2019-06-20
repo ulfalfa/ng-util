@@ -1,33 +1,31 @@
-
-
-<ng-container  *ngIf="control.expandable; else flat">
+<ng-container *ngIf="control.expandable; else flat">
   <mat-expansion-panel [formGroup]="formGroup">
-  <mat-expansion-panel-header>
-    <mat-panel-title>
-      {{control.label}}
-    </mat-panel-title>
-  </mat-expansion-panel-header>
-  <ng-container *ngTemplateOutlet="group"></ng-container>
-</mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{control.label}}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ng-container *ngTemplateOutlet="group"></ng-container>
+  </mat-expansion-panel>
 </ng-container>
 
 <ng-template #flat>
-    <div fxLayout="column" class="mat-elevation-z1 groupcontent">
-    <h2>{{control.label}}</h2>
-  <ng-container *ngTemplateOutlet="group"></ng-container>
-  
-</div>
+  <div fxLayout="column" class="mat-elevation-z1 groupcontent">
+    <p *ngIf="control.label" class="mat-body-2">{{control.label}}</p>
+    <ng-container *ngTemplateOutlet="group"></ng-container>
+
+  </div>
 </ng-template>
 
 
 <ng-template #group>
-    <form fxLayout="column" [formGroup]="formGroup">
-        <ng-container *ngFor="let formControl of control.controls">
-            <ng-container [ngSwitch]="formControl.type">
-               <us-form-group *ngSwitchCase="'group'" [style.width.%]="100" [control]="formControl"></us-form-group>
-                <us-form-array *ngSwitchCase="'array'" [style.width.%]="100"  [control]="formControl"></us-form-array>
-                <us-form-control *ngSwitchDefault fxFlex  [control]="formControl"></us-form-control>
-            </ng-container>
-        </ng-container>
-</form>
+  <form fxLayout="row wrap" fxLayoutAlign="start center" [formGroup]="formGroup">
+    <div [fxFlex]="formControl.flex" *ngFor="let formControl of control.controls">
+      <ng-container [ngSwitch]="formControl.type">
+        <us-form-group *ngSwitchCase="'group'" [control]="formControl"></us-form-group>
+        <us-form-array *ngSwitchCase="'array'" [control]="formControl"></us-form-array>
+        <us-form-control *ngSwitchDefault fxFlex [control]="formControl"></us-form-control>
+      </ng-container>
+    </div>
+  </form>
 </ng-template>
