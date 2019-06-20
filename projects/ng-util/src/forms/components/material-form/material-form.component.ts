@@ -56,7 +56,6 @@ export class MaterialFormComponent implements OnInit, OnDestroy {
   _form: FormGroup
   @Input() set form(val: FormGroup) {
     if (val) {
-      console.log('Setting Form', val)
       this._form = val
       if (this.value) {
         this.form.patchValue(this.value)
