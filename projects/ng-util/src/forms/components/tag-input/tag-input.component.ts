@@ -6,6 +6,7 @@ import {
   ElementRef,
   Host,
   Optional,
+  SkipSelf,
 } from '@angular/core'
 
 import {
@@ -59,7 +60,7 @@ export class TagInputComponent implements OnInit, ControlValueAccessor {
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>
 
   disabled = false
-  constructor(@Optional() @Host() public formControl: NgControl) {
+  constructor(@Optional() @SkipSelf() @Host() public formControl: NgControl) {
     if (this.formControl) {
       // Note: we provide the value accessor through here, instead of
       // the `providers` to avoid running into a circular import.
