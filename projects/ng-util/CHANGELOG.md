@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.4](https://github.com/ulfalfa/ng-util/compare/@ulfalfa/ng-util@0.3.3...@ulfalfa/ng-util@0.3.4) (2019-06-21)
+
+
+### Bug Fixes
+
+* **forms:** upgraded injection of tokens ([f472375](https://github.com/ulfalfa/ng-util/commit/f472375))
+
+
+
+
+
 ## [0.3.3](https://github.com/ulfalfa/ng-util/compare/@ulfalfa/ng-util@0.3.2...@ulfalfa/ng-util@0.3.3) (2019-06-20)
 
 
