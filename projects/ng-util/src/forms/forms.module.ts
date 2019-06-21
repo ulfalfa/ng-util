@@ -32,7 +32,7 @@ import {
 import { DynamicControlComponent } from './components/dynamic-control/dynamic-control.component'
 import { TagInputComponent } from './components/tag-input/tag-input.component'
 
-function fcFactory(controlSet: Type<any>[], fbs: FormbuilderService) {
+export function fcFactory(controlSet: Type<any>[], fbs: FormbuilderService) {
   fbs.registerControls(controlSet)
   return fbs
 }
