@@ -3,6 +3,8 @@ import {
   ModuleWithProviders,
   Type,
   InjectionToken,
+  Optional,
+  SkipSelf,
 } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
@@ -24,11 +26,16 @@ import { GroupComponent } from './components/group/group.component'
 import { MaterialFormComponent } from './components/material-form/material-form.component'
 
 import {
-  HA4US_FORM_CONTROLS,
+  US_FORM_CONTROLS,
   FormbuilderService,
 } from './services/formbuilder.service'
 import { DynamicControlComponent } from './components/dynamic-control/dynamic-control.component'
 import { TagInputComponent } from './components/tag-input/tag-input.component'
+
+function fcFactory(controlSet: Type<any>[], fbs: FormbuilderService) {
+  fbs.registerControls(controlSet)
+  return fbs
+}
 
 @NgModule({
   imports: [
@@ -61,37 +68,27 @@ import { TagInputComponent } from './components/tag-input/tag-input.component'
     TagInputComponent,
   ],
   entryComponents: [TagInputComponent],
-  providers: [
-    {
-      provide: HA4US_FORM_CONTROLS,
-      useValue: [TagInputComponent],
-      multi: true,
-    },
-  ],
 })
 export class UsFormsModule {
-  static forProvider(controls: Type<any>[] = []): ModuleWithProviders {
-    return {
-      ngModule: UsFormsModule,
-      providers: [
-        {
-          provide: HA4US_FORM_CONTROLS,
-          useValue: controls,
-          multi: true,
-        },
-      ],
-    }
-  }
   static forFeature(controls: Type<any>[] = []): ModuleWithProviders {
     return {
       ngModule: UsFormsModule,
       providers: [
         {
-          provide: HA4US_FORM_CONTROLS,
-          useValue: controls,
-          multi: true,
+          provide: FormbuilderService,
+          useFactory: fcFactory,
+          multi: false,
+          deps: [
+            US_FORM_CONTROLS,
+            [FormbuilderService, new Optional(), new SkipSelf()],
+          ],
         },
-        FormbuilderService,
+
+        {
+          provide: US_FORM_CONTROLS,
+          useValue: controls,
+          multi: false,
+        },
       ],
     }
   }

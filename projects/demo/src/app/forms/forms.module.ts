@@ -22,7 +22,7 @@ import { FormsComponent } from './forms/forms.component'
     MatSelectModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    UsFormsModule.forFeature([]),
+    UsFormsModule.forFeature(),
   ],
 })
 export class FormsModule {}

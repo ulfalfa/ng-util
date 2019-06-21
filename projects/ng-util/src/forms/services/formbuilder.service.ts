@@ -27,15 +27,8 @@ import {
   DynamicFormArray,
 } from '../models/forms'
 // @dynamic
-export const HA4US_FORM_CONTROLS: InjectionToken<string> = new InjectionToken(
-  'Ha4usFormControls',
-  {
-    providedIn: 'root',
-    factory: () => {
-      const result = []
-      return result
-    },
-  }
+export const US_FORM_CONTROLS: InjectionToken<any[]> = new InjectionToken(
+  'UsFormControls'
 )
 
 import {
@@ -43,7 +36,8 @@ import {
   PARAM_MATCH,
   DynamicFormControlDescription,
 } from './form.decorator'
-// @dynamic
+import { TagInputComponent } from '../components/tag-input/tag-input.component'
+
 @Injectable({ providedIn: 'root' })
 export class FormbuilderService {
   static count = 0
@@ -54,26 +48,28 @@ export class FormbuilderService {
   constructor(
     protected fb: FormBuilder,
     @Optional()
-    @Inject(HA4US_FORM_CONTROLS)
-    customControls: Type<any>[][]
+    @Inject(US_FORM_CONTROLS)
+    customControls: Type<any>[]
   ) {
-    this.registerControls(customControls)
+    this.registerControls([TagInputComponent])
+    if (customControls) {
+      this.registerControls(customControls)
+    }
   }
 
-  registerControls(customControlsSet: Type<any>[][]) {
-    customControlsSet.forEach((set: Type<any>[]) =>
-      set.forEach(control => {
-        const metadata = Reflect.get(control, METADATA_KEY)
-        if (!metadata) {
-          throw new Error(`No metadata for control ${control.name}`)
-        }
+  registerControls(customControlSet: Type<any>[]) {
+    customControlSet.forEach(control => {
+      console.log('Register control', control.name)
+      const metadata = Reflect.get(control, METADATA_KEY)
+      if (!metadata) {
+        throw new Error(`No metadata for control ${control.name}`)
+      }
 
-        this.controlDict.set(metadata.name, {
-          param: metadata.param,
-          component: control,
-        })
+      this.controlDict.set(metadata.name, {
+        param: metadata.param,
+        component: control,
       })
-    )
+    })
   }
 
   control(
