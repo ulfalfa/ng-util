@@ -39,7 +39,7 @@ import {
 } from './form.decorator'
 import { TagInputComponent } from '../components/tag-input/tag-input.component'
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class FormbuilderService {
   static count = 0
 
