@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.7](https://github.com/ulfalfa/ng-util/compare/@ulfalfa/ng-util@0.3.6...@ulfalfa/ng-util@0.3.7) (2019-06-24)
+
+
+### Bug Fixes
+
+* **forms:** again module handling (hmpff...) ([a99746b](https://github.com/ulfalfa/ng-util/commit/a99746b))
+
+
+
+
+
 ## [0.3.6](https://github.com/ulfalfa/ng-util/compare/@ulfalfa/ng-util@0.3.5...@ulfalfa/ng-util@0.3.6) (2019-06-24)
 
 
