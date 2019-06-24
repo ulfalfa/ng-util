@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.6](https://github.com/ulfalfa/ng-util/compare/@ulfalfa/ng-util@0.3.5...@ulfalfa/ng-util@0.3.6) (2019-06-24)
+
+
+### Bug Fixes
+
+* **forms:** changing the module loading (forFeature method) ([ba08404](https://github.com/ulfalfa/ng-util/commit/ba08404))
+
+
+
+
+
 ## [0.3.5](https://github.com/ulfalfa/ng-util/compare/@ulfalfa/ng-util@0.3.4...@ulfalfa/ng-util@0.3.5) (2019-06-21)
 
 
