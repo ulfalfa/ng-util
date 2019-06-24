@@ -32,11 +32,6 @@ import {
 import { DynamicControlComponent } from './components/dynamic-control/dynamic-control.component'
 import { TagInputComponent } from './components/tag-input/tag-input.component'
 
-export function fcFactory(controlSet: Type<any>[], fbs: FormbuilderService) {
-  fbs.registerControls(controlSet)
-  return fbs
-}
-
 @NgModule({
   imports: [
     CommonModule,
@@ -72,8 +67,8 @@ export function fcFactory(controlSet: Type<any>[], fbs: FormbuilderService) {
     {
       provide: US_FORM_CONTROLS,
       useValue: [TagInputComponent],
+      multi: true,
     },
-    FormbuilderService,
   ],
 })
 export class UsFormsModule {
@@ -82,17 +77,9 @@ export class UsFormsModule {
       ngModule: UsFormsModule,
       providers: [
         {
-          provide: FormbuilderService,
-          useFactory: fcFactory,
-
-          deps: [
-            US_FORM_CONTROLS,
-            [FormbuilderService, new Optional(), new SkipSelf()],
-          ],
-        },
-        {
           provide: US_FORM_CONTROLS,
           useValue: controls,
+          multi: true,
         },
       ],
     }
