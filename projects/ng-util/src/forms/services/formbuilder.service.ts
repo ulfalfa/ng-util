@@ -4,6 +4,7 @@ import {
   Inject,
   InjectionToken,
   Type,
+  SkipSelf,
 } from '@angular/core'
 
 import {
@@ -38,7 +39,7 @@ import {
 } from './form.decorator'
 import { TagInputComponent } from '../components/tag-input/tag-input.component'
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class FormbuilderService {
   static count = 0
 
@@ -47,19 +48,24 @@ export class FormbuilderService {
   controlDict = new Map<string, DynamicFormControlDescription>()
   constructor(
     protected fb: FormBuilder,
-    @Optional()
     @Inject(US_FORM_CONTROLS)
-    customControls: Type<any>[]
+    customControls: Type<any>[],
+    @Optional() @SkipSelf() protected fbs: FormbuilderService
   ) {
-    this.registerControls([TagInputComponent])
-    if (customControls) {
-      this.registerControls(customControls)
+    // console.log('Creating FormbuilderService', customControls)
+    if (fbs) {
+      throw new Error(
+        'Please use forRoot and forFeature method, to prevent more than one instance of Formbuilderservice'
+      )
     }
+
+    this.registerControls(customControls)
   }
 
-  registerControls(customControlSet: Type<any>[]) {
+  registerControls(customControlSet: Type<any>[] = []) {
+    // console.log('Register Controls', customControlSet)
     customControlSet.forEach(control => {
-      console.log('Register control', control.name)
+      // console.log('Register control', control.name)
       const metadata = Reflect.get(control, METADATA_KEY)
       if (!metadata) {
         throw new Error(`No metadata for control ${control.name}`)

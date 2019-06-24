@@ -29,6 +29,12 @@ export class FormsComponent implements OnInit {
         required: true,
         pattern: /[a-z].*/,
       },
+      {
+        type: 'test',
+        id: 'test',
+        label: 'NOT SHOWN',
+        required: true,
+      },
     ],
     [
       {

@@ -10,10 +10,13 @@ import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon'
 
+import { UsFormsModule } from '@ulfalfa/ng-util'
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    UsFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,

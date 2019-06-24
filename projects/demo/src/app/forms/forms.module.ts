@@ -12,9 +12,11 @@ import { FlexLayoutModule } from '@angular/flex-layout'
 import { UsFormsModule } from '@ulfalfa/ng-util'
 import { FormsRoutingModule } from './forms-routing.module'
 import { FormsComponent } from './forms/forms.component'
+import { TestcontrolComponent } from './testcontrol/testcontrol.component'
 
 @NgModule({
-  declarations: [FormsComponent],
+  declarations: [FormsComponent, TestcontrolComponent],
+  entryComponents: [TestcontrolComponent],
   imports: [
     CommonModule,
     FormsRoutingModule,
@@ -22,7 +24,7 @@ import { FormsComponent } from './forms/forms.component'
     MatSelectModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    UsFormsModule.forFeature(),
+    UsFormsModule.forFeature([TestcontrolComponent]),
   ],
 })
 export class FormsModule {}

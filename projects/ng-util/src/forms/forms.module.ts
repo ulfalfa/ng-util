@@ -68,6 +68,13 @@ export function fcFactory(controlSet: Type<any>[], fbs: FormbuilderService) {
     TagInputComponent,
   ],
   entryComponents: [TagInputComponent],
+  providers: [
+    {
+      provide: US_FORM_CONTROLS,
+      useValue: [TagInputComponent],
+    },
+    FormbuilderService,
+  ],
 })
 export class UsFormsModule {
   static forFeature(controls: Type<any>[] = []): ModuleWithProviders {
@@ -77,17 +84,15 @@ export class UsFormsModule {
         {
           provide: FormbuilderService,
           useFactory: fcFactory,
-          multi: false,
+
           deps: [
             US_FORM_CONTROLS,
             [FormbuilderService, new Optional(), new SkipSelf()],
           ],
         },
-
         {
           provide: US_FORM_CONTROLS,
           useValue: controls,
-          multi: false,
         },
       ],
     }
