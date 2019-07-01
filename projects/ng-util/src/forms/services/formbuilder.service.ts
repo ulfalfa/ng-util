@@ -91,6 +91,16 @@ export class FormbuilderService {
       validators.push(Validators.required)
     }
 
+    if (formDefinition.min) {
+      validators.push(Validators.min(formDefinition.min))
+    }
+    if (formDefinition.max) {
+      validators.push(Validators.max(formDefinition.max))
+    }
+    if (formDefinition.pattern) {
+      validators.push(Validators.pattern(formDefinition.pattern))
+    }
+
     const control = this.fb.control(data || formDefinition.default, validators)
 
     if (parent) {
@@ -173,7 +183,7 @@ export class FormbuilderService {
           break
         default:
           this.control(
-            formElement as DynamicFormArray,
+            formElement as DynamicFormControl,
             parent,
             data && data[formElement.id]
           )

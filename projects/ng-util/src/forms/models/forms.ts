@@ -14,7 +14,7 @@ export type DynamicControlArrayType = 'array'
 
 export interface DynamicFormElement {
   type: string
-  label?: string
+  placeholder?: string
 }
 
 export interface DynamicFormControl extends DynamicFormElement {
@@ -25,6 +25,7 @@ export interface DynamicFormControl extends DynamicFormElement {
   values?: string[]
   default?: any
   flex?: number
+  [addProp: string]: any
 }
 
 export interface DynamicFormGroup extends DynamicFormElement {

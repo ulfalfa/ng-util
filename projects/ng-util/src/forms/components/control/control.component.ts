@@ -15,6 +15,7 @@ import {
   NgForm,
   FormGroup,
   Validators,
+  NgControl,
 } from '@angular/forms'
 
 import { ErrorStateMatcher } from '@angular/material'
@@ -40,12 +41,12 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class ControlComponent implements OnInit, AfterViewInit {
-  public control
+  public control: DynamicFormControl
   @Input('control')
   set _control(newControl: DynamicFormControl) {
     this.control = newControl
-    const childForm = this.controlContainer.control
-    this.formControl = childForm.get(this.control.id) as FormControl
+    const form = this.controlContainer.control
+    this.formControl = form.get(this.control.id) as FormControl
 
     this.cdr.detectChanges()
   }
@@ -59,7 +60,7 @@ export class ControlComponent implements OnInit, AfterViewInit {
 
   constructor(
     private cdr: ChangeDetectorRef,
-    protected controlContainer: ControlContainer,
+    @Optional() protected controlContainer: ControlContainer,
     protected fbs: FormbuilderService
   ) {}
 
@@ -70,14 +71,5 @@ export class ControlComponent implements OnInit, AfterViewInit {
     this.cdr.detectChanges()
   }
 
-  ngAfterViewInit() {
-    const myValidators = []
-    if (this.control.pattern) {
-      myValidators.push(Validators.pattern(this.control.pattern))
-    }
-    if (this.control.required) {
-      myValidators.push(Validators.required)
-    }
-    this.formControl.setValidators(myValidators)
-  }
+  ngAfterViewInit() {}
 }

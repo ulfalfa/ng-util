@@ -75,7 +75,7 @@ export class MaterialFormComponent implements OnInit, OnDestroy {
   @Output() formChange = new EventEmitter<FormGroup>()
 
   constructor(
-    @Host() @Optional() protected controlContainer: ControlContainer,
+    @Self() @Optional() protected controlContainer: ControlContainer,
     protected fbs: FormbuilderService
   ) {}
 

@@ -10,12 +10,14 @@ import {
   ComponentRef,
   Optional,
   Host,
+  Self,
 } from '@angular/core'
 
 import {
   ControlValueAccessor,
   DefaultValueAccessor,
   NG_VALUE_ACCESSOR,
+  NgControl,
 } from '@angular/forms'
 
 import { DynamicFormControl } from '../../models/forms'
@@ -27,11 +29,11 @@ import { FormbuilderService } from '../../services/formbuilder.service'
   templateUrl: './dynamic-control.component.html',
   styleUrls: ['./dynamic-control.component.scss'],
   providers: [
-    {
+    /* {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => DynamicControlComponent),
       multi: true,
-    },
+    },*/
   ],
 })
 export class DynamicControlComponent implements OnInit, ControlValueAccessor {
@@ -45,8 +47,13 @@ export class DynamicControlComponent implements OnInit, ControlValueAccessor {
 
   constructor(
     protected resolver: ComponentFactoryResolver,
-    protected fbs: FormbuilderService
-  ) {}
+    protected fbs: FormbuilderService,
+    @Optional() protected ngControl: NgControl
+  ) {
+    if (ngControl) {
+      this.ngControl.valueAccessor = this
+    }
+  }
 
   ngOnInit() {
     if (this.control) {
@@ -59,20 +66,22 @@ export class DynamicControlComponent implements OnInit, ControlValueAccessor {
       const componentRef: ComponentRef<
         DefaultValueAccessor
       > = this.vcr.createComponent(componentFactory)
+
       this.component = componentRef.instance
 
       if (descriptor.param) {
         this.component[descriptor.param] = descriptor.value
       }
 
-      this.component.placeholder = this.control.label
-      this.component.required = this.control.required
-      this.component.max = this.control.max
-      this.component.min = this.control.min
-      this.component.values = this.control.values
+      console.log('Inputs', componentFactory.inputs)
+
+      componentFactory.inputs.forEach(input => {
+        if (this.control.hasOwnProperty(input.propName)) {
+          this.component[input.propName] = this.control[input.propName]
+        }
+      })
     }
   }
-
   public writeValue(value: string) {}
   public registerOnChange(fn) {}
   public registerOnTouched(fn) {}
