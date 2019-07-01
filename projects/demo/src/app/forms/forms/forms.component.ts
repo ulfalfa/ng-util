@@ -25,14 +25,14 @@ export class FormsComponent implements OnInit {
       {
         type: 'text',
         id: 'textfield',
-        label: 'SimpleFormField',
+        placeholder: 'SimpleFormField',
         required: true,
         pattern: /[a-z].*/,
       },
       {
         type: 'test',
         id: 'test',
-        label: 'NOT SHOWN',
+        placeholder: 'NOT SHOWN',
         required: true,
       },
     ],
@@ -40,20 +40,20 @@ export class FormsComponent implements OnInit {
       {
         type: 'text',
         id: 'textfield',
-        label: 'Singlefield',
+        placeholder: 'Singlefield',
         required: true,
         pattern: /[a-z].*/,
       },
       {
         type: 'tags',
         id: 'mytags',
-        label: 'Enter tags',
+        placeholder: 'Enter tags',
         required: true,
         values: ['test', 'hello', 'world'],
         default: [],
       },
       {
-        label: 'Expandable Group',
+        placeholder: 'Expandable Group',
         type: 'group',
         expandable: true,
         controls: [
@@ -65,14 +65,14 @@ export class FormsComponent implements OnInit {
         ],
       },
       {
-        label: '2. Expandable Group',
+        placeholder: '2. Expandable Group',
         type: 'group',
         expandable: true,
         controls: [
           {
             id: 'counter',
             type: 'number',
-            label: 'Item Count',
+            placeholder: 'Item Count',
             flex: 100,
           },
         ],
@@ -80,20 +80,20 @@ export class FormsComponent implements OnInit {
       {
         id: 'group',
         type: 'group',
-        label: 'Non Expandable Group With Label',
+        placeholder: 'Non Expandable Group With Label',
 
         controls: [
           {
             id: 'test',
             type: 'string',
             // values: ['Ein', 'Zwei', 'Drei'],
-            label: 'TESTINPUT',
+            placeholder: 'TESTINPUT',
             flex: 50,
           },
           {
             id: 'check',
             type: 'boolean',
-            label: 'Check!',
+            placeholder: 'Check!',
             flex: 50,
           },
         ],
@@ -107,13 +107,13 @@ export class FormsComponent implements OnInit {
             id: 'test',
             type: 'string',
             // values: ['Ein', 'Zwei', 'Drei'],
-            label: 'TESTINPUT',
+            placeholder: 'TESTINPUT',
             flex: 100,
           },
           {
             id: 'check',
             type: 'boolean',
-            label: 'Check!',
+            placeholder: 'Check!',
           },
         ],
       },
@@ -122,11 +122,11 @@ export class FormsComponent implements OnInit {
         id: 'topics',
         min: 2,
         max: 5,
-        label: 'Topics',
+        placeholder: 'Topics',
         controls: [
           {
             id: 'topic',
-            label: 'Topic',
+            placeholder: 'Topic',
             type: 'string',
             flex: 80,
             required: true,
@@ -134,7 +134,7 @@ export class FormsComponent implements OnInit {
           {
             id: 'hide',
             type: 'boolean',
-            label: 'Hidden',
+            placeholder: 'Hidden',
           },
         ],
       },

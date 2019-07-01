@@ -2,7 +2,7 @@
   <mat-expansion-panel [formGroup]="formGroup">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        {{control.label}}
+        {{control.placeholder}}
       </mat-panel-title>
     </mat-expansion-panel-header>
     <ng-container *ngTemplateOutlet="group"></ng-container>
@@ -11,7 +11,7 @@
 
 <ng-template #flat>
   <div fxLayout="column" class="mat-elevation-z1 groupcontent">
-    <p *ngIf="control.label" class="mat-body-2">{{control.label}}</p>
+    <p *ngIf="control.placeholder" class="mat-body-2">{{control.placeholder}}</p>
     <ng-container *ngTemplateOutlet="group"></ng-container>
 
   </div>

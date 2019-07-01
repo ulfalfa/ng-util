@@ -73,8 +73,6 @@ export class DynamicControlComponent implements OnInit, ControlValueAccessor {
         this.component[descriptor.param] = descriptor.value
       }
 
-      console.log('Inputs', componentFactory.inputs)
-
       componentFactory.inputs.forEach(input => {
         if (this.control.hasOwnProperty(input.propName)) {
           this.component[input.propName] = this.control[input.propName]

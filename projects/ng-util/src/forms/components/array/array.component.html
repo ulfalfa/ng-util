@@ -1,5 +1,5 @@
 <div class="mat-elevation-z2 groupcontent" [formGroup]="parentGroup">
-  <p *ngIf="control.label" class="mat-body-2">{{control.label}}</p>
+  <p *ngIf="control.placeholder" class="mat-body-2">{{control.placeholder}}</p>
   <ng-container [formArrayName]="control.id">
     <div class="arrayelement" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px"
       *ngFor="let group of formArray.controls; let i=index">
