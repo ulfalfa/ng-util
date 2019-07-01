@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.9](https://github.com/ulfalfa/ng-util/compare/@ulfalfa/ng-util@0.3.8...@ulfalfa/ng-util@0.3.9) (2019-07-01)
+
+
+### Bug Fixes
+
+* **forms:** major fixes ([1cffdf8](https://github.com/ulfalfa/ng-util/commit/1cffdf8))
+* **forms:** major fixes ([cfa13d8](https://github.com/ulfalfa/ng-util/commit/cfa13d8))
+
+
+
+
+
 ## [0.3.8](https://github.com/ulfalfa/ng-util/compare/@ulfalfa/ng-util@0.3.7...@ulfalfa/ng-util@0.3.8) (2019-06-24)
 
 
